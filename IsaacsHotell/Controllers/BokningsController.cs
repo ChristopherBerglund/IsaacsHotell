@@ -164,7 +164,7 @@ namespace IsaacsHotell.Controllers
             return View();
         }
 
-        public async Task<IActionResult> LookForAvailableRooms(DateTime BookFrom, DateTime BookTo, int NoOfMembers, Rum Rum)
+        public IActionResult LookForAvailableRooms(DateTime BookFrom, DateTime BookTo, int NoOfMembers, Rum Rum)
         {
 
             //var incheckningdatum = _context.Bokningar.Select(x => x.Incheckning).ToList();

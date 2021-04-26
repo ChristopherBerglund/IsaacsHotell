@@ -1,5 +1,7 @@
 using IsaacsHotell.Data;
+using IsaacsHotell.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,8 +24,11 @@ namespace IsaacsHotell
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<HotellDbContext>();
-                    DBinit.Initialiser(context);
+                    var hotellcontext = services.GetRequiredService<HotellDbContext>();
+                    //var context = services.GetRequiredService<ApplicationDbContext>();
+
+
+                    //DBinit.Initialiser(context);
 
                 }
                 catch (Exception ex)

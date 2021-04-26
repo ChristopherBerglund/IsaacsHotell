@@ -55,9 +55,9 @@ namespace IsaacsHotell.Data
                 .WithMany(b => b.Bokningar);
 
             modelBuilder.Entity<Anställd>()
-                .HasData(           new Anställd {Id=1, Förnamn = "Anders", Efternamn = "Anka", Roll = "Admin" },
-                                    new Anställd {Id=2, Förnamn = "Bertil", Efternamn = "Bengtsson", Roll = "Receptionist" },
-                                    new Anställd {Id=3, Förnamn = "Ceasar", Efternamn = "Cello", Roll = "Städare" });
+                .HasData(           new Anställd {Id=1, Förnamn = "Anders", Efternamn = "Anka"},
+                                    new Anställd {Id=2, Förnamn = "Bertil", Efternamn = "Bengtsson",},
+                                    new Anställd {Id=3, Förnamn = "Ceasar", Efternamn = "Cello",});
             modelBuilder.Entity<Rum>()
                 .HasData(
                 new Rum { Id = 1, Namn = "Jan", Antalsovplatser = 1, Smutsigt = false},

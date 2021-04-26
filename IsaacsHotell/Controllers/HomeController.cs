@@ -1,4 +1,5 @@
 ﻿using IsaacsHotell.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;

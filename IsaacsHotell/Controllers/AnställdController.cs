@@ -90,7 +90,7 @@ namespace IsaacsHotell.Controllers
         {
             if (id != anställd.Id)
             {
-                return NotFound();
+                return NotFound(); 
             }
 
             if (ModelState.IsValid)
@@ -102,7 +102,7 @@ namespace IsaacsHotell.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AnställdExists(anställd.Id))
+                    if (!AnställdExists(anställd.Id)) 
                     {
                         return NotFound();
                     }
@@ -123,7 +123,7 @@ namespace IsaacsHotell.Controllers
             {
                 return NotFound();
             }
-
+           
             var anställd = await _context.Anställda
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (anställd == null)
@@ -147,7 +147,7 @@ namespace IsaacsHotell.Controllers
 
         private bool AnställdExists(int id)
         {
-            return _context.Anställda.Any(e => e.Id == id);
+            return _context.Anställda.Any(e => e.Id == id); 
         }
     }
 }
