@@ -175,14 +175,16 @@ namespace IsaacsHotell.Controllers
         {
 
             var usergäst = new Gäst();
-
-            var Antalupptagnaplatserinnomspannet = _context.Bokningar.Where(x => x.Incheckning >= BookFrom && x.Utcheckning <= BookTo)
-                                            .Select(x => x.Rum.Antalsovplatser).Sum();
-
-            var totalaplatser = _context.Rum.Select(x => x.Antalsovplatser).Sum();
+            var allarum = _context.Rum.Select(x => x).ToList();
+            var allaupptagnarum = _context.Bokningar.Where(x => x.Incheckning >= BookFrom && x.Utcheckning <= BookTo)
+                                            .Select(x => x.Rum).ToList();
+           
+            var upptagnaplatser = allaupptagnarum.Select(x => x.Antalsovplatser).Sum(); 
+            var totalaplatser = allarum.Select(x => x.Antalsovplatser).Sum();
+          
             var user = await _userManager.GetUserAsync(User);
 
-            if (totalaplatser - Antalupptagnaplatserinnomspannet >= NoOfMembers)
+            if (totalaplatser - upptagnaplatser >= NoOfMembers) // kollar om det finns plats de datumen
             {
                 var resultgäst = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x).ToList();
                 if (!resultgäst.Any()) // if sats för att undivka dubbletter i db
@@ -201,11 +203,13 @@ namespace IsaacsHotell.Controllers
                 }
 
 
-                var ledigtrum = _context.Rum.Select(x => x.Id).ToList();
-                var testrum = ledigtrum[0];
+
+                allarum.RemoveAll(x => allaupptagnarum.Exists(y => y.Id == x.Id));  //Tar bort alla upptagna rum från listan. kvar är rummen som kan bli bokade
+                var aktuelltbokninsrum = allarum.FirstOrDefault(x => x.Antalsovplatser == NoOfMembers);
+
 
                 //problem 1. Väljer alltid rum1(Jan)
-                var nybokning = new Bokning { Gäst = usergäst, Incheckning = BookFrom, Utcheckning = BookTo, RumId = testrum };
+                var nybokning = new Bokning { Gäst = usergäst, Incheckning = BookFrom, Utcheckning = BookTo, Rum = aktuelltbokninsrum };
                
                 await _context.Bokningar.AddAsync(nybokning);
                 await _context.SaveChangesAsync();
