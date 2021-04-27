@@ -32,7 +32,7 @@ namespace IsaacsHotell
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("IdentityConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true) // ändra till true för att logga in
+            services.AddIdentity<Användare, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true) // ändra till true för att logga in
                         .AddDefaultUI()
                         .AddEntityFrameworkStores<ApplicationDbContext>()
                         .AddDefaultTokenProviders();

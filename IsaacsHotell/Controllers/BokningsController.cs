@@ -7,16 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IsaacsHotell.Data;
 using IsaacsHotell.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace IsaacsHotell.Controllers
 {
+    [Authorize]
     public class BokningsController : Controller
     {
         private readonly HotellDbContext _context;
+        private readonly UserManager<Användare> _userManager;
+        private readonly SignInManager<Användare> _signInManager;
 
-        public BokningsController(HotellDbContext context)
+        public BokningsController(HotellDbContext context, UserManager<Användare> userManager, SignInManager<Användare> signInManager)
         {
             _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         // GET: Boknings
@@ -164,67 +171,52 @@ namespace IsaacsHotell.Controllers
             return View();
         }
 
-        public IActionResult LookForAvailableRooms(DateTime BookFrom, DateTime BookTo, int NoOfMembers, Rum Rum)
+        public async Task<IActionResult> LookForAvailableRooms(DateTime BookFrom, DateTime BookTo, int NoOfMembers, Rum Rum)
         {
 
-            //var incheckningdatum = _context.Bokningar.Select(x => x.Incheckning).ToList();
-            //var utcheckningdatum = _context.Bokningar.Select(x => x.Utcheckning).ToList();
+            var usergäst = new Gäst();
 
-            //var ledigaplatser = 
-
-
-            //ViewBag.DateFrom = BookFrom;
-            //ViewBag.DateTo = BookTo;
-            //ViewBag.Number = NoOfMembers;
-
-            //foreach (Rum item in _context.Rum)
-            //{
-            //    ViewBag.Rooms = item.Namn;
-            //}
-            List<Rum> Rums = new List<Rum>();
             var Antalupptagnaplatserinnomspannet = _context.Bokningar.Where(x => x.Incheckning >= BookFrom && x.Utcheckning <= BookTo)
                                             .Select(x => x.Rum.Antalsovplatser).Sum();
 
             var totalaplatser = _context.Rum.Select(x => x.Antalsovplatser).Sum();
+            var user = await _userManager.GetUserAsync(User);
 
             if (totalaplatser - Antalupptagnaplatserinnomspannet >= NoOfMembers)
             {
+                var resultgäst = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x).ToList();
+                if (!resultgäst.Any()) // if sats för att undivka dubbletter i db
+                {
+                    var nygäst = new Gäst { Förnamn = user.Namn, Efternamn = user.Efternamn };
+
+                    await _context.Gäster.AddAsync(nygäst);
+                    await _context.SaveChangesAsync();
+
+                    var gäst = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x).ToList();
+                    usergäst = gäst[0];
+                }
+                else
+                {
+                    usergäst = resultgäst[0];
+                }
+
+
+                var ledigtrum = _context.Rum.Select(x => x.Id).ToList();
+                var testrum = ledigtrum[0];
+
+                //problem 1. Väljer alltid rum1(Jan)
+                var nybokning = new Bokning { Gäst = usergäst, Incheckning = BookFrom, Utcheckning = BookTo, RumId = testrum };
+               
+                await _context.Bokningar.AddAsync(nybokning);
+                await _context.SaveChangesAsync();
+
                 return View();
             }
             else
             {
-                ViewBag.Errormessage = "Nej";
+                ViewBag.Errormessage = "Det verkar som alla rummen är upptagna. Försök med ett annat datum!";
                 return View();
             }
-
-            
-
-           // return !_context.bookings
-           //           .Any(booking =>
-           //                       item.StartTime < booking.EndTime
-           //                       && item.EndTime > booking.StartTime);
-
-            //foreach (Bokning item in _context.Bokningar)
-            //{
-            //    if (BookFrom >= item.Incheckning && BookTo <= item.Utcheckning)
-            //    {
-            //        Rums.remove(item.Rum);
-            //    }
-            //    else
-            //    {
-            //        Rums.Add(item.Rum);
-            //    }
-            //}
-
-            //foreach (var item in Rums)
-            //{
-            //    Console.WriteLine(item);
-            //}
-
-            //ViewBag.ruuum = Rums;
-
-
-          
         }
         
 

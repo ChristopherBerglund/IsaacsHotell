@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using IsaacsHotell.Data;
+using IsaacsHotell.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -19,25 +21,28 @@ namespace IsaacsHotell.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<Användare> _signInManager;
+        private readonly UserManager<Användare> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly HotellDbContext _context;
 
         public RegisterModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<Användare> userManager,
+            SignInManager<Användare> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            RoleManager<IdentityRole> roleManager)
+            RoleManager<IdentityRole> roleManager,
+            HotellDbContext context
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
             _roleManager = roleManager;
-
+            _context = context;
         }
 
         [BindProperty]
@@ -49,6 +54,15 @@ namespace IsaacsHotell.Areas.Identity.Pages.Account
 
         public class InputModel
         {
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Namn")]
+            public string Namn { get; set; }
+
+            [Required]
+            [Display(Name = "Efternamn")]
+            [DataType(DataType.Text)]
+            public string Efternamn { get; set; }
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -64,7 +78,8 @@ namespace IsaacsHotell.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-            public string Name { get; set; }
+            //public string Förnamn { get; set; }
+            //public string Efternamn { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -77,12 +92,19 @@ namespace IsaacsHotell.Areas.Identity.Pages.Account
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
-            var role = _roleManager.FindByIdAsync(Input.Name).Result;
+            //var role = _roleManager.FindByIdAsync(Input.Roll).Result;
+
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                //Skapar en likadan gäst ej klar
+                //var gäst = new Gäst {Förnamn=Input.Förnamn, Efternamn=Input.Efternamn };
+                //_context.Gäster.Add(gäst);
+                //_context.SaveChanges();
+
+                var user = new Användare { Namn=Input.Namn, Efternamn=Input.Efternamn, UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
