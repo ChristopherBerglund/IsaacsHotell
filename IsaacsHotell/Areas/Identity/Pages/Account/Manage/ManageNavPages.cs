@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace IsaacsHotell.Areas.Identity.Pages.Account.Manage
 {
+
     public static class ManageNavPages
     {
         public static string Index => "Index";

@@ -1,4 +1,5 @@
 ﻿using IsaacsHotell.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -32,7 +33,13 @@ namespace IsaacsHotell.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+         
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [Authorize(Policy= "Admin")]
+        public IActionResult Administration()
+        {
+            return View();
+        }
     }
-}
+}   

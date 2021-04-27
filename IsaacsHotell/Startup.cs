@@ -28,16 +28,16 @@ namespace IsaacsHotell
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Första contextet är för identitet
+            //Fï¿½rsta contextet ï¿½r fï¿½r identitet
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("IdentityConnection")));
-            services.AddIdentity<Användare, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true) // ändra till true för att logga in
+            services.AddIdentity<AnvÃ¤ndare, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true) // ï¿½ndra till true fï¿½r att logga in
                         .AddDefaultUI()
                         .AddEntityFrameworkStores<ApplicationDbContext>()
                         .AddDefaultTokenProviders();
 
-            //services.AddIdentityCore<Anställd>()
+            //services.AddIdentityCore<Anstï¿½lld>()
 
 
             services.AddDbContext<HotellDbContext>(options =>

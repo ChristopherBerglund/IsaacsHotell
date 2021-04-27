@@ -21,7 +21,7 @@ namespace IsaacsHotell.Areas.Identity
                 {
                     options.AddPolicy("readpolicy",
                         builder => builder.RequireRole("Admin", "Reception", "Gäst", "Lokalvårdare"));
-                    options.AddPolicy("writepolicy",
+                    options.AddPolicy("Admin",
                         builder => builder.RequireRole("Admin", "Reception"));
                 });
             });
