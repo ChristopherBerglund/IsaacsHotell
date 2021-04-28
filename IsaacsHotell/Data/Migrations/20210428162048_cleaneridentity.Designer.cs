@@ -4,14 +4,16 @@ using IsaacsHotell.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IsaacsHotell.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210428162048_cleaneridentity")]
+    partial class cleaneridentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,7 +96,7 @@ namespace IsaacsHotell.Data.Migrations
                         {
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "438d97dd-5248-48be-9ac1-a52ad8bb5d73",
+                            ConcurrencyStamp = "8d1c3237-6cee-4d3f-bcba-454db1997d06",
                             Efternamn = "Ofoedu",
                             Email = "frankofoedu@gmail.com",
                             EmailConfirmed = true,
@@ -102,10 +104,10 @@ namespace IsaacsHotell.Data.Migrations
                             Namn = "Frank",
                             NormalizedEmail = "FRANKOFOEDU@GMAIL.COM",
                             NormalizedUserName = "FRANKOFOEDU@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJtDiy3JmqFlWQ0g63tFgKFKPneJGvjVFMtFKy9ytJ8sXddaQO8ZKPCvFQmBBTGu2w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMBFxP35A97gQFKoPIvIdC8jUklYTfdBJiaYw2gDgYMOJeHnOidPhjLVJJkVxjYX/g==",
                             PhoneNumber = "0784545454",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "19872282-8cb9-43b8-8c60-b05f093286ea",
+                            SecurityStamp = "ecc15ef7-612f-4d6c-9373-922bcece2825",
                             TwoFactorEnabled = false,
                             UserName = "frankofoedu@gmail.com"
                         },
@@ -113,7 +115,7 @@ namespace IsaacsHotell.Data.Migrations
                         {
                             Id = "451089f0-da4s–5d6s-pqwe-59kmoldp78df6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cfcdad1b-4a03-42b3-b79f-3c924f7a2939",
+                            ConcurrencyStamp = "7219d6f3-9a07-434b-bb32-ab356d2c9f17",
                             Efternamn = "Vodka",
                             Email = "Abosolut@gmail.com",
                             EmailConfirmed = true,
@@ -121,10 +123,10 @@ namespace IsaacsHotell.Data.Migrations
                             Namn = "Absolut",
                             NormalizedEmail = "ABOSOLUT@GMAIL.COM",
                             NormalizedUserName = "ABSOLUT@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGH/Xj40fuIzrGRT0v6TwVwHffCus2C2TiVft5wdFjYaHIG3I/dsOdcaU68Z0ezuSQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEdTOSsn22KhTabav+FFCc0idq7/fNyzqk7jkAavKN2XE6EcOId3wenfJIe0lYYD1Q==",
                             PhoneNumber = "0784545884",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "0b161a29-2cbc-4e0a-b7b8-1adda4dd1b0e",
+                            SecurityStamp = "824274d5-1c8f-4d4a-8c0f-e5fc4bd69497",
                             TwoFactorEnabled = false,
                             UserName = "Abosolut@gmail.com"
                         },
@@ -132,20 +134,19 @@ namespace IsaacsHotell.Data.Migrations
                         {
                             Id = "569842f0-78dw–65ws-qwbf-59dafgqw345f6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "088ff29f-f3e5-4a5c-9e9a-f0773b4175f9",
+                            ConcurrencyStamp = "f3ad8e9d-288b-4572-8a80-cc943fa979aa",
                             Efternamn = "STÄD",
-                            Email = "clean@gmail.com",
+                            Email = "städ@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             Namn = "STÄD",
-                            NormalizedEmail = "CLEAN@GMAIL.COM",
-                            NormalizedUserName = "CLEAN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOLIfziUxlgQMFZW/IOHEiLzO/2I0IIZmdR+0T8RXabXb8cuhV0nLZKZbxLNC67zTg==",
+                            NormalizedEmail = "STÄD@GMAIL.COM",
+                            NormalizedUserName = "STÄD@GMAIL.COM",
                             PhoneNumber = "0748612345",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "8ad8d3e6-f4f6-40f1-b7b4-664353153d26",
+                            SecurityStamp = "a243c616-351c-4851-b8be-f2a27f843972",
                             TwoFactorEnabled = false,
-                            UserName = "clean@gmail.com"
+                            UserName = "Städ@gmail.com"
                         });
                 });
 

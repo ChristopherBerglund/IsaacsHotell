@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace IsaacsHotell.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "Admin")]
     public class BokningsController : Controller
     {
         private readonly HotellDbContext _context;

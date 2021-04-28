@@ -29,7 +29,7 @@ namespace IsaacsHotell.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             var hittauserid = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x.Id).ToList();
-            if (DateTime.Now.Hour >= 18)
+            if (DateTime.Now.Hour <= 18)
             {
                 var Frukost = new Order { Pris = 50, Produkt = "Frukost", GästId = hittauserid[0] };
                 _context.Ordrar.Add(Frukost);
