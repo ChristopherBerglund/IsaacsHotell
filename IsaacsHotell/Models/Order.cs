@@ -10,7 +10,10 @@ namespace IsaacsHotell.Models
     {
         public int Id { get; set; }
         public Double Pris { get; set; }
+        public string Produkt { get; set; }
         public int GästId { get; set; }
         public Gäst Gäst { get; set; }
     }
+
+    
 }

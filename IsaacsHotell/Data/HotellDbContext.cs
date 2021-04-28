@@ -60,28 +60,28 @@ namespace IsaacsHotell.Data
                                     new Anställd {Id=3, Förnamn = "Ceasar", Efternamn = "Cello",});
             modelBuilder.Entity<Rum>()
                 .HasData(
-                new Rum { Id = 1, Namn = "Jan", Antalsovplatser = 1, Smutsigt = false},
-                new Rum { Id = 2, Namn = "Feb", Antalsovplatser = 1, Smutsigt = false},
-                new Rum { Id = 3, Namn = "Mar", Antalsovplatser = 1, Smutsigt = false},
-                new Rum { Id = 4, Namn = "Apr", Antalsovplatser = 1, Smutsigt = false},
-                new Rum { Id = 5, Namn = "Maj", Antalsovplatser = 1, Smutsigt = false},
-                new Rum { Id = 6, Namn = "Jun", Antalsovplatser = 2, Smutsigt = false},
-                new Rum { Id = 7, Namn = "Jul", Antalsovplatser = 2, Smutsigt = false},
-                new Rum { Id = 8, Namn = "Aug", Antalsovplatser = 2, Smutsigt = false},
-                new Rum { Id = 9, Namn = "Sep", Antalsovplatser = 2, Smutsigt = false},
-                new Rum { Id = 10, Namn = "Okt", Antalsovplatser = 2, Smutsigt = false }
+                new Rum { Id = 1, Namn = "Jan", Antalsovplatser = 1, Smutsigt = false, PrisPerNatt = 399},
+                new Rum { Id = 2, Namn = "Feb", Antalsovplatser = 1, Smutsigt = false, PrisPerNatt = 399},
+                new Rum { Id = 3, Namn = "Mar", Antalsovplatser = 1, Smutsigt = false, PrisPerNatt = 399},
+                new Rum { Id = 4, Namn = "Apr", Antalsovplatser = 1, Smutsigt = false, PrisPerNatt = 399},
+                new Rum { Id = 5, Namn = "Maj", Antalsovplatser = 1, Smutsigt = false, PrisPerNatt = 399},
+                new Rum { Id = 6, Namn = "Jun", Antalsovplatser = 2, Smutsigt = false, PrisPerNatt = 499},
+                new Rum { Id = 7, Namn = "Jul", Antalsovplatser = 2, Smutsigt = false, PrisPerNatt = 499},
+                new Rum { Id = 8, Namn = "Aug", Antalsovplatser = 2, Smutsigt = false, PrisPerNatt = 499},
+                new Rum { Id = 9, Namn = "Sep", Antalsovplatser = 2, Smutsigt = false, PrisPerNatt = 499},
+                new Rum { Id = 10, Namn = "Okt", Antalsovplatser = 2, Smutsigt = false, PrisPerNatt = 499}
                 );
             //fler rum
             modelBuilder.Entity<Bokning>()
                 .HasData(new Bokning { Id=1, GästId = 1, RumId = 1, Incheckning = new DateTime(2021, 4, 22), Utcheckning= new DateTime(2021, 4, 23) },
-                new Bokning { Id = 2, GästId = 1, RumId = 2, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23) },
-                new Bokning { Id = 3, GästId = 1, RumId = 3, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23) },
-                new Bokning { Id = 4, GästId = 1, RumId = 4, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23) },
-                new Bokning { Id = 5, GästId = 1, RumId = 5, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23) },
-                new Bokning { Id = 6, GästId = 1, RumId = 6, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23) },
-                new Bokning { Id = 7, GästId = 1, RumId = 7, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23) },
-                new Bokning { Id = 8, GästId = 1, RumId = 8, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23) },
-                new Bokning { Id = 9, GästId = 1, RumId = 9, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23) },
+                new Bokning { Id = 2, GästId = 1, RumId = 2, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23)},
+                new Bokning { Id = 3, GästId = 1, RumId = 3, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23)},
+                new Bokning { Id = 4, GästId = 1, RumId = 4, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23)},
+                new Bokning { Id = 5, GästId = 1, RumId = 5, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23)},
+                new Bokning { Id = 6, GästId = 1, RumId = 6, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23)},
+                new Bokning { Id = 7, GästId = 1, RumId = 7, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23)},
+                new Bokning { Id = 8, GästId = 1, RumId = 8, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23)},
+                new Bokning { Id = 9, GästId = 1, RumId = 9, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23)},
                 new Bokning { Id = 10, GästId = 1, RumId = 10, Incheckning = new DateTime(2021, 4, 22), Utcheckning = new DateTime(2021, 4, 23) }
                 
 
@@ -92,7 +92,7 @@ namespace IsaacsHotell.Data
                 .HasData(new Gäst { Id= 1, Förnamn = "Alf", Efternamn = "Aronsson", BokningId = 1, OrderId = 1 });
 
             modelBuilder.Entity<Order>()
-                .HasData(new Order { Id=1, GästId = 1, Pris = 990 });
+                .HasData(new Order { Id=1, GästId = 1, Pris = 990, Produkt="Hotellnätter" });
         }
     }
 }

@@ -7,16 +7,33 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IsaacsHotell.Data;
 using IsaacsHotell.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace IsaacsHotell.Controllers
 {
     public class OrdersController : Controller
     {
         private readonly HotellDbContext _context;
+        private readonly UserManager<Användare> _userManager;
+        private readonly SignInManager<Användare> _signInManager;
 
-        public OrdersController(HotellDbContext context)
+        public OrdersController(HotellDbContext context, UserManager<Användare> userManager, SignInManager<Användare> signInManager)
         {
             _context = context;
+            _userManager = userManager;
+            _signInManager = signInManager;
+        }
+
+
+        public async Task<IActionResult> UserOrder()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var gästenorder = _context.Gäster.Where(x => x.Förnamn ==user.Namn ).Include(x => x.Order).Select(x => x.Order).ToList();
+            
+            //var gäst = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x).ToList();
+
+
+            return View(gästenorder);
         }
 
         // GET: Orders
@@ -149,5 +166,7 @@ namespace IsaacsHotell.Controllers
         {
             return _context.Ordrar.Any(e => e.Id == id);
         }
+
+
     }
 }

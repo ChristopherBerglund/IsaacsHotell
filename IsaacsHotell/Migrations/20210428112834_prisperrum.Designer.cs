@@ -4,14 +4,16 @@ using IsaacsHotell.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IsaacsHotell.Migrations
 {
     [DbContext(typeof(HotellDbContext))]
-    partial class HotellDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210428112834_prisperrum")]
+    partial class prisperrum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -218,9 +220,6 @@ namespace IsaacsHotell.Migrations
                     b.Property<double>("Pris")
                         .HasColumnType("float");
 
-                    b.Property<string>("Produkt")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.ToTable("Ordrar");
@@ -230,8 +229,7 @@ namespace IsaacsHotell.Migrations
                         {
                             Id = 1,
                             GästId = 1,
-                            Pris = 990.0,
-                            Produkt = "Hotellnätter"
+                            Pris = 990.0
                         });
                 });
 

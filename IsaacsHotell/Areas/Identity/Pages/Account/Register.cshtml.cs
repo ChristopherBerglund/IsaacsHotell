@@ -98,9 +98,9 @@ namespace IsaacsHotell.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 //Skapar en likadan gäst ej klar
-                //var gäst = new Gäst {Förnamn=Input.Förnamn, Efternamn=Input.Efternamn };
-                //_context.Gäster.Add(gäst);
-                //_context.SaveChanges();
+                var gäst = new Gäst { Förnamn = Input.Namn, Efternamn = Input.Efternamn };
+                _context.Gäster.Add(gäst);
+                _context.SaveChanges();
 
                 var user = new Användare { Namn=Input.Namn, Efternamn=Input.Efternamn, UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
