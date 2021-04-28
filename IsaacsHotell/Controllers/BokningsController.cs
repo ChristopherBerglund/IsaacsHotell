@@ -186,29 +186,14 @@ namespace IsaacsHotell.Controllers
 
             if (totalaplatser - upptagnaplatser >= NoOfMembers) // kollar om det finns plats de datumen
             {
-                var resultgäst = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x).ToList();
-                if (!resultgäst.Any()) // if sats för att undivka dubbletter i db
-                {
-                    var nygäst = new Gäst { Förnamn = user.Namn, Efternamn = user.Efternamn };
 
-                    await _context.Gäster.AddAsync(nygäst);
-                    await _context.SaveChangesAsync();
-
-                    var gäst = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x).ToList();
-                    usergäst = gäst[0];
-                }
-                else
-                {
-                    usergäst = resultgäst[0];
-                }
-
-
+                var gästen = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x).ToList();
+                usergäst = gästen[0];
+              
 
                 allarum.RemoveAll(x => allaupptagnarum.Exists(y => y.Id == x.Id));  //Tar bort alla upptagna rum från listan. kvar är rummen som kan bli bokade
                 var aktuelltbokninsrum = allarum.FirstOrDefault(x => x.Antalsovplatser == NoOfMembers);
 
-
-                //problem 1. Väljer alltid rum1(Jan)
                 var nybokning = new Bokning { Gäst = usergäst, Incheckning = BookFrom, Utcheckning = BookTo, Rum = aktuelltbokninsrum };
                
                 await _context.Bokningar.AddAsync(nybokning);
