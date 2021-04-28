@@ -71,7 +71,7 @@ namespace IsaacsHotell.Controllers
             if (ModelState.IsValid) //kommer inte in här när jag försöker skapa. Nått med relationen i db som är fuckad
             {
                 _context.Add(bokning);
-                 //här kanske det måste uppdateras i Gästen också
+                //här kanske det måste uppdateras i Gästen också
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -171,33 +171,43 @@ namespace IsaacsHotell.Controllers
             return View();
         }
 
+    
+        //KONTROLLERAR OM DET FINNS LEDIGA RUM
         public async Task<IActionResult> LookForAvailableRooms(DateTime BookFrom, DateTime BookTo, int NoOfMembers, Rum Rum)
         {
-
-            var usergäst = new Gäst();
-            var allarum = _context.Rum.Select(x => x).ToList();
-            var allaupptagnarum = _context.Bokningar.Where(x => x.Incheckning >= BookFrom && x.Utcheckning <= BookTo)
-                                            .Select(x => x.Rum).ToList();
            
-            var upptagnaplatser = allaupptagnarum.Select(x => x.Antalsovplatser).Sum(); 
+            //var usergäst = new Gäst();
+            var allarum = _context.Rum.Select(x => x).ToList();
+            var allaupptagnarum = _context.Bokningar.Where(x => x.Incheckning <= BookFrom && x.Utcheckning >= BookTo)
+                                            .Select(x => x.Rum).ToList();
+
+            var upptagnaplatser = allaupptagnarum.Select(x => x.Antalsovplatser).Sum();
             var totalaplatser = allarum.Select(x => x.Antalsovplatser).Sum();
-          
-            var user = await _userManager.GetUserAsync(User);
+
+            //var user = await _userManager.GetUserAsync(User);
 
             if (totalaplatser - upptagnaplatser >= NoOfMembers) // kollar om det finns plats de datumen
-            {
+            { 
 
-                var gästen = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x).ToList();
-                usergäst = gästen[0];
-              
 
                 allarum.RemoveAll(x => allaupptagnarum.Exists(y => y.Id == x.Id));  //Tar bort alla upptagna rum från listan. kvar är rummen som kan bli bokade
                 var aktuelltbokninsrum = allarum.FirstOrDefault(x => x.Antalsovplatser == NoOfMembers);
 
-                var nybokning = new Bokning { Gäst = usergäst, Incheckning = BookFrom, Utcheckning = BookTo, Rum = aktuelltbokninsrum };
-               
-                await _context.Bokningar.AddAsync(nybokning);
-                await _context.SaveChangesAsync();
+
+
+                //var nybokning = new Bokning { Gäst = usergäst, Incheckning = BookFrom, Utcheckning = BookTo, Rum = aktuelltbokninsrum };
+
+                var nätter = (BookTo - BookFrom).TotalDays;
+                var totalkostnad = nätter * aktuelltbokninsrum.PrisPerNatt;
+
+                ViewBag.Rumsinfo = "Vi hittade det perfekta rummet för dig, totalt: " + nätter + "nätter, för den totala kostnaden: "+ totalkostnad +" , Ska du slå till?"; 
+
+                ViewBag.bookfrom = BookFrom;
+                ViewBag.bookto = BookTo;
+                ViewBag.noofmembers = NoOfMembers;
+                ViewBag.Room = aktuelltbokninsrum.Id;
+                ViewBag.antnätter = nätter;
+                ViewBag.kostnad = totalkostnad;
 
                 return View();
             }
@@ -206,8 +216,63 @@ namespace IsaacsHotell.Controllers
                 ViewBag.Errormessage = "Det verkar som alla rummen är upptagna. Försök med ett annat datum!";
                 return View();
             }
+          
+
         }
-        
+        //SKAPAR BOKNINGEN
+        public async Task<IActionResult> ConfirmTheBooking(DateTime _BookFrom, DateTime _BookTo, int _NoOfMembers, int _RoomId, int _nätter, double _kostnad)
+        {
+
+            var usergäst = new Gäst();
+            var user = await _userManager.GetUserAsync(User);
+
+            //var resultgäst = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x).ToList();
+            //if (!resultgäst.Any()) // if sats för att undivka dubbletter i db
+            //{
+                //var nygäst = new Gäst { Förnamn = user.Namn, Efternamn = user.Efternamn };
+
+                //await _context.Gäster.AddAsync(nygäst);
+                //await _context.SaveChangesAsync();
+
+                var gäst = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x).ToList();
+                usergäst = gäst[0];
+            //}
+            //else
+            //{
+            //    usergäst = resultgäst[0];
+            //}
+           
+            var nybokning = new Bokning { Gäst = usergäst, Incheckning = _BookFrom, Utcheckning = _BookTo, RumId = _RoomId };
+
+            
+            await _context.Bokningar.AddAsync(nybokning);
+            await _context.SaveChangesAsync();
+            //slänga in bokningsid på gästen
+            //slänga in order id på gästen
+
+
+            var gästbookning =  _context.Gäster.Where(x => x.Förnamn == usergäst.Förnamn).Select(x => x.BokningId);
+
+
+            var nyorder = new Order { Pris = _kostnad, GästId = usergäst.Id, Produkt="Hotellnätter" };
+            await _context.Ordrar.AddAsync(nyorder);
+            await _context.SaveChangesAsync();
+            
+            var nätter = (_BookTo - _BookFrom).TotalDays;
+
+            //ViewBag.namn = user.Namn.ToString();
+            ViewBag.från = _BookFrom;
+            ViewBag.till = _BookTo;
+            ViewBag.mail = user.Email;
+            //ViewBag.rum = _Room.Namn.ToString();
+            ViewBag.antalnätter = _nätter;
+            ViewBag.antGäster = _NoOfMembers;
+            ViewBag.kostnad1 = _kostnad;
+
+
+            return View();
+
+        }
 
 
         private bool BokningExists(int id)
