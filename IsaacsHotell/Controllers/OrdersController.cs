@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using IsaacsHotell.Data;
 using IsaacsHotell.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Web;
 
 namespace IsaacsHotell.Controllers
 {
@@ -24,16 +25,38 @@ namespace IsaacsHotell.Controllers
             _signInManager = signInManager;
         }
 
+        public async Task <IActionResult> Frukost()
+        {
+            //if(DateTime.Now => 18.00) fixa
+            var user = await _userManager.GetUserAsync(User);
+            var hittauserid = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x.Id).ToList();
 
+            var Frukost = new Order { Pris = 50, Produkt = "Frukost", GästId = hittauserid[0] };
+            _context.Ordrar.Add(Frukost);
+             await _context.SaveChangesAsync();
+
+
+            //if (result.IsCompletedSuccessfully)
+            //{
+            //    return Content("<script language='javascript' type='text/javascript'>alert('Frukost är bokad tills imorgon!');</script>");
+            
+            return RedirectToAction("Thankyou", "Orders");
+        }
+        public ActionResult BokatFrukost()
+        {
+            TempData["alertMessage"] = "Tack för du bokat frukost";
+            return View();
+        }
         public async Task<IActionResult> UserOrder()
         {
             var user = await _userManager.GetUserAsync(User);
-            var gästenorder = _context.Gäster.Where(x => x.Förnamn ==user.Namn ).Include(x => x.Order).Select(x => x.Order).ToList();
-            
+            var gästenorder = _context.Gäster.Where(x => x.Förnamn ==user.Namn).Select(x => x.Id).ToList();
+
+            var ordrar = _context.Ordrar.Where(x => x.GästId == gästenorder[0]).ToList();
             //var gäst = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x).ToList();
 
 
-            return View(gästenorder);
+            return View(ordrar);
         }
 
         // GET: Orders
@@ -166,7 +189,6 @@ namespace IsaacsHotell.Controllers
         {
             return _context.Ordrar.Any(e => e.Id == id);
         }
-
 
     }
 }

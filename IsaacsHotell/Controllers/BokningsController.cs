@@ -190,16 +190,13 @@ namespace IsaacsHotell.Controllers
             { 
 
 
-
                 allarum.RemoveAll(x => allaupptagnarum.Exists(y => y.Id == x.Id));  //Tar bort alla upptagna rum från listan. kvar är rummen som kan bli bokade
                 var aktuelltbokninsrum = allarum.FirstOrDefault(x => x.Antalsovplatser == NoOfMembers);
 
 
-                //problem 1. Väljer alltid rum1(Jan)
+
                 //var nybokning = new Bokning { Gäst = usergäst, Incheckning = BookFrom, Utcheckning = BookTo, Rum = aktuelltbokninsrum };
 
-                //await _context.Bokningar.AddAsync(nybokning);
-                //await _context.SaveChangesAsync();
                 var nätter = (BookTo - BookFrom).TotalDays;
                 var totalkostnad = nätter * aktuelltbokninsrum.PrisPerNatt;
 
@@ -254,7 +251,7 @@ namespace IsaacsHotell.Controllers
             //slänga in order id på gästen
 
 
-            var gästbookning = await _context.Gäster.Where(x => x.Förnamn == usergäst.Förnamn).Select(x => x.BokningId).
+            var gästbookning =  _context.Gäster.Where(x => x.Förnamn == usergäst.Förnamn).Select(x => x.BokningId);
 
 
             var nyorder = new Order { Pris = _kostnad, GästId = usergäst.Id, Produkt="Hotellnätter" };

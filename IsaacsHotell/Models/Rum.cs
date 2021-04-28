@@ -14,7 +14,7 @@ namespace IsaacsHotell.Models
        
         public bool Smutsigt { get; set; }
         [ForeignKey("FK_Bokning")]
-        public int? BokningId { get; set; }
+        public int? BokningId { get; set; } // testa tabort för att see id i bokningen
         public List<Bokning> Bokningar { get; set; }
         public double PrisPerNatt { get; set; }
     }
