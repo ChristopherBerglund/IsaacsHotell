@@ -27,25 +27,21 @@ namespace IsaacsHotell.Controllers
 
         public async Task <IActionResult> Frukost()
         {
-            //if(DateTime.Now => 18.00) fixa
             var user = await _userManager.GetUserAsync(User);
             var hittauserid = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x.Id).ToList();
+            if (DateTime.Now.Hour >= 18)
+            {
+                var Frukost = new Order { Pris = 50, Produkt = "Frukost", GästId = hittauserid[0] };
+                _context.Ordrar.Add(Frukost);
+                await _context.SaveChangesAsync();
+                TempData["msg"] = "<script>alert('Frukost Bokat tills imorgon!');</script>";
+            }
+            else
+            {
+                TempData["msg"] = "<script>alert('Frukost kan tyvärr inte bokas efter klockan 18');</script>";
+            }
 
-            var Frukost = new Order { Pris = 50, Produkt = "Frukost", GästId = hittauserid[0] };
-            _context.Ordrar.Add(Frukost);
-             await _context.SaveChangesAsync();
-
-
-            //if (result.IsCompletedSuccessfully)
-            //{
-            //    return Content("<script language='javascript' type='text/javascript'>alert('Frukost är bokad tills imorgon!');</script>");
-            
-            return RedirectToAction("Thankyou", "Orders");
-        }
-        public ActionResult BokatFrukost()
-        {
-            TempData["alertMessage"] = "Tack för du bokat frukost";
-            return View();
+            return RedirectToAction("Index", "Home");
         }
         public async Task<IActionResult> UserOrder()
         {
