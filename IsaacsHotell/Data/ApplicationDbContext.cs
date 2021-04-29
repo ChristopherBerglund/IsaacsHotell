@@ -141,12 +141,12 @@ namespace IsaacsHotell.Data
                    new Användare {
                 Id = CLEANERCLEANER_ID,
                 Email = "Alva@hotellet.se",
-                NormalizedEmail = "ALVA@HOTELLETS.SE",
+                NormalizedEmail = "ALVA@HOTELLET.SE",
                 EmailConfirmed = true,
                 Namn = "Alva",
                 Efternamn = "Lotr",
                 UserName = "Alva@hotellet.se",
-                NormalizedUserName = "ALVA@HOTELLETS.SE",
+                NormalizedUserName = "ALVA@HOTELLET.SE",
                 PhoneNumber = "0748612345",
                 PhoneNumberConfirmed = true,
                 SecurityStamp = Guid.NewGuid().ToString()

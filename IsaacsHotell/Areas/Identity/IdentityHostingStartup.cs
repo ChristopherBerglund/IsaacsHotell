@@ -19,10 +19,10 @@ namespace IsaacsHotell.Areas.Identity
 
                 services.AddAuthorization(options =>
                 {
-                    options.AddPolicy("Städ",
-                        builder => builder.RequireRole( "Admin", "Reception", "Lokalvårdare"));
+                    options.AddPolicy("Cleaner",
+                        builder => builder.RequireRole( "Admin", "Reception", "Cleaner"));
                     options.AddPolicy("Reception",
-                        builder => builder.RequireRole("Admin", "Reception"));
+                        builder => builder.RequireRole("Admin", "Cleaner"));
                     options.AddPolicy("Admin",
                         builder => builder.RequireRole("Admin"));
                 });

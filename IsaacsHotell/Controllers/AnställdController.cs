@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IsaacsHotell.Data;
 using IsaacsHotell.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IsaacsHotell.Controllers
 {
+    [Authorize("Admin")]
     public class AnställdController : Controller
     {
         private readonly HotellDbContext _context;

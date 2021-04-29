@@ -97,7 +97,13 @@ namespace IsaacsHotell.Data
                 );
 
             modelBuilder.Entity<Gäst>()
-                .HasData(new Gäst { Id= 1, Förnamn = "Karl", Efternamn = "Wagner", BokningId = 1, OrderId = 1 });
+                .HasData(new Gäst { Id= 1, Förnamn = "Karl", Efternamn = "Wagner"},
+                new Gäst { Id = 2, Förnamn = "Amanda", Efternamn = "Wagner"},
+                new Gäst { Id = 3, Förnamn = "Algot", Efternamn = "Algotsson"},
+                new Gäst { Id = 4, Förnamn = "Berit", Efternamn = "Beritsson"},
+                new Gäst { Id = 5, Förnamn = "Ceasar", Efternamn = "Stark"},
+                 new Gäst { Id = 6, Förnamn = "Alva", Efternamn = "Lotr"},
+                  new Gäst { Id = 7, Förnamn = "Bernard", Efternamn = "Ruskie" });
 
             modelBuilder.Entity<Order>()
                 .HasData(new Order { Id=1, GästId = 1, Pris = 990, Produkt="Hotellnätter" });

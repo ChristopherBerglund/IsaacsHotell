@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace IsaacsHotell.Controllers
 {
-    [Authorize(Policy = "Admin")]
+    [Authorize("Admin, Reception")]
     public class BokningsController : Controller
     {
         private readonly HotellDbContext _context;
@@ -27,6 +27,7 @@ namespace IsaacsHotell.Controllers
         }
 
         // GET: Boknings
+       
         public async Task<IActionResult> Index()
         {
             var hotellDbContext = _context.Bokningar.Include(b => b.Gäst).Include(b => b.Rum);

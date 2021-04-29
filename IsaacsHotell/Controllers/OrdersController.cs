@@ -9,9 +9,11 @@ using IsaacsHotell.Data;
 using IsaacsHotell.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Web;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IsaacsHotell.Controllers
 {
+    [Authorize("Admin, Reception")]
     public class OrdersController : Controller
     {
         private readonly HotellDbContext _context;

@@ -4,14 +4,16 @@ using IsaacsHotell.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IsaacsHotell.Migrations
 {
     [DbContext(typeof(HotellDbContext))]
-    partial class HotellDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210429204950_flergästervidstart")]
+    partial class flergästervidstart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -239,18 +241,6 @@ namespace IsaacsHotell.Migrations
                             Id = 5,
                             Efternamn = "Stark",
                             Förnamn = "Ceasar"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Efternamn = "Lotr",
-                            Förnamn = "Alva"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Efternamn = "Ruskie",
-                            Förnamn = "Bernard"
                         });
                 });
 
