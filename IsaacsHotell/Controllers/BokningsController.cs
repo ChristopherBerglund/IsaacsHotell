@@ -226,29 +226,13 @@ namespace IsaacsHotell.Controllers
             var usergäst = new Gäst();
             var user = await _userManager.GetUserAsync(User);
 
-            //var resultgäst = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x).ToList();
-            //if (!resultgäst.Any()) // if sats för att undivka dubbletter i db
-            //{
-                //var nygäst = new Gäst { Förnamn = user.Namn, Efternamn = user.Efternamn };
+            var gäst = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x).ToList();
+            usergäst = gäst[0];
 
-                //await _context.Gäster.AddAsync(nygäst);
-                //await _context.SaveChangesAsync();
-
-                var gäst = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x).ToList();
-                usergäst = gäst[0];
-            //}
-            //else
-            //{
-            //    usergäst = resultgäst[0];
-            //}
-           
             var nybokning = new Bokning { Gäst = usergäst, Incheckning = _BookFrom, Utcheckning = _BookTo, RumId = _RoomId };
-
             
             await _context.Bokningar.AddAsync(nybokning);
             await _context.SaveChangesAsync();
-            //slänga in bokningsid på gästen
-            //slänga in order id på gästen
 
 
             var gästbookning =  _context.Gäster.Where(x => x.Förnamn == usergäst.Förnamn).Select(x => x.BokningId);

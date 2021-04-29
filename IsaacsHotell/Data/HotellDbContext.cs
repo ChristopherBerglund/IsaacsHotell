@@ -55,8 +55,8 @@ namespace IsaacsHotell.Data
                 .WithMany(b => b.Bokningar);
 
             modelBuilder.Entity<Anställd>()
-                .HasData(           new Anställd {Id=1, Förnamn = "Anders", Efternamn = "Anka"},
-                                    new Anställd {Id=2, Förnamn = "Bertil", Efternamn = "Bengtsson",},
+                .HasData(           new Anställd {Id=1, Förnamn = "Anders", Efternamn = "Wagner"},
+                                    new Anställd {Id=2, Förnamn = "Bertil", Efternamn = "Wagner",},
                                     new Anställd {Id=3, Förnamn = "Ceasar", Efternamn = "Cello",});
             modelBuilder.Entity<Rum>()
                 .HasData(
@@ -89,7 +89,7 @@ namespace IsaacsHotell.Data
                 );
 
             modelBuilder.Entity<Gäst>()
-                .HasData(new Gäst { Id= 1, Förnamn = "Alf", Efternamn = "Aronsson", BokningId = 1, OrderId = 1 });
+                .HasData(new Gäst { Id= 1, Förnamn = "Karl", Efternamn = "Wagner", BokningId = 1, OrderId = 1 });
 
             modelBuilder.Entity<Order>()
                 .HasData(new Order { Id=1, GästId = 1, Pris = 990, Produkt="Hotellnätter" });
