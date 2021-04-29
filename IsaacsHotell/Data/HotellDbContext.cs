@@ -18,6 +18,9 @@ namespace IsaacsHotell.Data
         public DbSet<Order> Ordrar { get; set; }
         public DbSet<Rum> Rum { get; set; }
         public DbSet<Bokning> Bokningar { get; set; }
+        public DbSet<StädRapport> StädRapporter { get; set; }
+
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -53,6 +56,11 @@ namespace IsaacsHotell.Data
             modelBuilder.Entity<Bokning>()
                 .HasOne(a => a.Rum)
                 .WithMany(b => b.Bokningar);
+
+            //modelBuilder.Entity<StädRapport>()
+            //   .HasOne(a => a.Rum)
+            //   .WithOne(b => b.StädRapport)
+            //   .HasForeignKey<Gäst>(c => c.StädId);
 
             modelBuilder.Entity<Anställd>()
                 .HasData(           new Anställd {Id=1, Förnamn = "Anders", Efternamn = "Anka"},

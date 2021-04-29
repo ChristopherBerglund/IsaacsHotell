@@ -1,7 +1,9 @@
-﻿using IsaacsHotell.Models;
+﻿using IsaacsHotell.Data;
+using IsaacsHotell.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -14,10 +16,12 @@ namespace IsaacsHotell.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly HotellDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, HotellDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -41,5 +45,6 @@ namespace IsaacsHotell.Controllers
         {
             return View();
         }
+      
     }
 }   

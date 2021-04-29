@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace IsaacsHotell.Models
         [ForeignKey("FK_Rum")]
         public int RumId { get; set; }
         public Rum Rum { get; set; }
+        public bool ExtraSäng { get; set; }
 
         static int Kollarledigaplatser()//??kanske nått att ha 
         {

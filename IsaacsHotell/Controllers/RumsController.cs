@@ -18,11 +18,42 @@ namespace IsaacsHotell.Controllers
         {
             _context = context;
         }
+        public IActionResult Städrapport()
+        {
 
+            var listasmutsigarum = _context.Bokningar.Where(x => x.Incheckning.Day <= DateTime.Now.Day && x.Utcheckning.Day >= DateTime.Now.Day).Include(x => x.Rum).Select(x => x.Rum).ToList();
+
+            foreach (var rum in listasmutsigarum)
+            {
+                rum.Smutsigt = true;
+                Console.WriteLine(rum.Id + " ");
+            }
+            _context.SaveChanges();
+
+            Console.WriteLine();
+            return RedirectToAction("städa", "Rums");
+
+        }
         // GET: Rums
         public async Task<IActionResult> Index()
         {
             return View(await _context.Rum.ToListAsync());
+        }
+        public async Task<IActionResult> Städa()
+        {
+            return View(await _context.Rum.ToListAsync());
+        }
+
+        public IActionResult Städaa(int _ID)
+        {
+            var städatrum = _context.Rum.Where(x => x.Id == _ID).Select(x => x).ToList();
+
+            städatrum[0].Smutsigt = false;
+            _context.SaveChanges();
+
+            
+
+            return RedirectToAction("städa", "Rums");
         }
 
         // GET: Rums/Details/5
@@ -151,3 +182,4 @@ namespace IsaacsHotell.Controllers
         }
     }
 }
+

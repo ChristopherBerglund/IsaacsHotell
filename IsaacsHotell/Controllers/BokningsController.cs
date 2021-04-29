@@ -173,54 +173,98 @@ namespace IsaacsHotell.Controllers
 
     
         //KONTROLLERAR OM DET FINNS LEDIGA RUM
-        public async Task<IActionResult> LookForAvailableRooms(DateTime BookFrom, DateTime BookTo, int NoOfMembers, Rum Rum)
+        public async Task<IActionResult> LookForAvailableRooms(DateTime BookFrom, DateTime BookTo, int NoOfMembers, Rum Rum, string Extrabed)
         {
-           
+
+
+            //bool overlap = tStartA < tEndB && tStartB < tEndA;
+            //bool overlap = a.start < b.end && b.start < a.end;
+
             //var usergäst = new Gäst();
             var allarum = _context.Rum.Select(x => x).ToList();
-            var allaupptagnarum = _context.Bokningar.Where(x => x.Incheckning <= BookFrom && x.Utcheckning >= BookTo)
+            //var allarumid = _context.Rum.Select(x => x.Id).ToList();
+
+            var allaupptagnarum = _context.Bokningar.Where(x => (x.Incheckning <= BookFrom && x.Utcheckning >= BookTo) 
+                                                    || (x.Incheckning < BookFrom && (x.Utcheckning > BookFrom && x.Utcheckning < BookTo)) 
+                                                    || ((x.Incheckning > BookFrom && x.Incheckning < BookTo) && x.Utcheckning > BookTo)
+                                                    || (x.Incheckning > BookFrom && x.Utcheckning < BookTo))
                                             .Select(x => x.Rum).ToList();
+            //var alluptagnaid = allaupptagnarum.Select(x => x.Id).ToList();
+
+            //var allastartinnan = _context.Bokningar.Where(x => x.Incheckning.Day < BookFrom.Day).Select(x => x.Incheckning.Day).ToList();
+
+
+
 
             var upptagnaplatser = allaupptagnarum.Select(x => x.Antalsovplatser).Sum();
             var totalaplatser = allarum.Select(x => x.Antalsovplatser).Sum();
-
+            bool IsAValidDate = false;
             //var user = await _userManager.GetUserAsync(User);
 
             if (totalaplatser - upptagnaplatser >= NoOfMembers) // kollar om det finns plats de datumen
             { 
+                if(BookFrom >= DateTime.Now.Date && BookTo >= BookFrom) 
+                {
+                    IsAValidDate = true;
+                    allarum.RemoveAll(x => allaupptagnarum.Exists(y => y == x));  //Tar bort alla upptagna rum från listan. kvar är rummen som kan bli bokade
+                    var aktuelltbokninsrum = allarum.FirstOrDefault(x => x.Antalsovplatser == NoOfMembers);
+
+                    //allarumid.RemoveAll(x => alluptagnaid.Exists(y => y == x));
+                    //var aktuelltbokninsrumid = allarumid[0];
+                    //var nybokning = new Bokning { Gäst = usergäst, Incheckning = BookFrom, Utcheckning = BookTo, Rum = aktuelltbokninsrum };
+
+                    var nätter = (BookTo - BookFrom).TotalDays;
+                    var totalkostnad = nätter * aktuelltbokninsrum.PrisPerNatt;
+                    if (NoOfMembers == 1)
+                    {
+                        ViewBag.Rumsinfo = "Vi hittade det perfekta rummet för dig!";
+                        ViewBag.Rumsinfo1 = "Kostnaden blir sammanlagt " + totalkostnad + ":- för " + nätter + " nätter.";
+                        ViewBag.Rumsinfo2 = "Ska vi slå till?";
+                    }
+                    else
+                    {
+                        ViewBag.Rumsinfo = "Vi hittade det perfekta rummet för erat sällskap!";
+                        ViewBag.Rumsinfo1 = "Kostnaden blir sammanlagt " + totalkostnad + ":- för " + nätter + " nätter.";
+                        ViewBag.Rumsinfo2 = "Ska vi slå till?";
+                    }
 
 
-                allarum.RemoveAll(x => allaupptagnarum.Exists(y => y.Id == x.Id));  //Tar bort alla upptagna rum från listan. kvar är rummen som kan bli bokade
-                var aktuelltbokninsrum = allarum.FirstOrDefault(x => x.Antalsovplatser == NoOfMembers);
+                    ViewBag.bookfrom = BookFrom;
+                    ViewBag.bookto = BookTo;
+                    ViewBag.noofmembers = NoOfMembers;
+                    ViewBag.Room = aktuelltbokninsrum.Id;
+                    //ViewBag.Room = aktuelltbokninsrumid;
+                    ViewBag.antnätter = nätter;
+                    ViewBag.kostnad = totalkostnad;
+                    ViewBag.ExtraSäng = Extrabed;
 
+                    ViewBag.IsAValidSearch = IsAValidDate;
+                    return View();
+                }
+                else
+                {
+                    IsAValidDate = false;
+                    ViewBag.IsAValidSearch = IsAValidDate;
+                    ViewBag.Errormessage1 = "Det verkar som att du har sökt på ogiltiga datum försök igen.";
+                    return View();
+                }
 
-
-                //var nybokning = new Bokning { Gäst = usergäst, Incheckning = BookFrom, Utcheckning = BookTo, Rum = aktuelltbokninsrum };
-
-                var nätter = (BookTo - BookFrom).TotalDays;
-                var totalkostnad = nätter * aktuelltbokninsrum.PrisPerNatt;
-
-                ViewBag.Rumsinfo = "Vi hittade det perfekta rummet för dig, totalt: " + nätter + "nätter, för den totala kostnaden: "+ totalkostnad +" , Ska du slå till?"; 
-
-                ViewBag.bookfrom = BookFrom;
-                ViewBag.bookto = BookTo;
-                ViewBag.noofmembers = NoOfMembers;
-                ViewBag.Room = aktuelltbokninsrum.Id;
-                ViewBag.antnätter = nätter;
-                ViewBag.kostnad = totalkostnad;
-
-                return View();
+               
             }
             else
             {
+                IsAValidDate = false;
+                ViewBag.IsAValidSearch = IsAValidDate;
                 ViewBag.Errormessage = "Det verkar som alla rummen är upptagna. Försök med ett annat datum!";
                 return View();
             }
+
+            
           
 
         }
         //SKAPAR BOKNINGEN
-        public async Task<IActionResult> ConfirmTheBooking(DateTime _BookFrom, DateTime _BookTo, int _NoOfMembers, int _RoomId, int _nätter, double _kostnad)
+        public async Task<IActionResult> ConfirmTheBooking(DateTime _BookFrom, DateTime _BookTo, int _NoOfMembers, int _RoomId, int _nätter, double _kostnad, bool _ExtraBed)
         {
 
             var usergäst = new Gäst();
@@ -242,15 +286,15 @@ namespace IsaacsHotell.Controllers
             //    usergäst = resultgäst[0];
             //}
            
-            var nybokning = new Bokning { Gäst = usergäst, Incheckning = _BookFrom, Utcheckning = _BookTo, RumId = _RoomId };
+            var nybokning = new Bokning { Gäst = usergäst, Incheckning = _BookFrom, Utcheckning = _BookTo, RumId = _RoomId, ExtraSäng = _ExtraBed };
 
-            
+            //var nyStäd = new Städrapport { Rum = Rum.Nam, ÄrStädat = false, SkallStädasDatum = BookTo };
             await _context.Bokningar.AddAsync(nybokning);
             await _context.SaveChangesAsync();
             //slänga in bokningsid på gästen
             //slänga in order id på gästen
 
-
+            
             var gästbookning =  _context.Gäster.Where(x => x.Förnamn == usergäst.Förnamn).Select(x => x.BokningId);
 
 
@@ -268,6 +312,7 @@ namespace IsaacsHotell.Controllers
             ViewBag.antalnätter = _nätter;
             ViewBag.antGäster = _NoOfMembers;
             ViewBag.kostnad1 = _kostnad;
+            ViewBag.ExtraBed = _ExtraBed;
 
 
             return View();

@@ -10,10 +10,19 @@
 <h4>Email = @ViewBag.mail</h4>
 
 @*<h4>Rum = @ViewBag.rum</h4>*@
-<h4>Incheckning = @ViewBag.från</h4>
-<h4>Utcheckning = @ViewBag.till</h4>
-<h4>Antal gäster = @ViewBag.antGäster </h4>
-<h4>Antal nätter = @ViewBag.antalnätter</h4>
+<h4>Incheckning: @ViewBag.från</h4>
+<h4>Utcheckning: @ViewBag.till</h4>
+<h4>Antal gäster: @ViewBag.antGäster </h4>
+<h4>Antal nätter: @ViewBag.antalnätter</h4>
+@if (ViewBag.ExtraBed == true)
+{
+    <h4>Extra säng: Ja </h4>
+}
+else
+{
+    <h4>Extra säng: Nej </h4>
+}
+
 <p> </p>
 <h4>Den totala summan för bokning: @ViewBag.kostnad1 Sek</h4>
 <p> - </p>
