@@ -20,6 +20,7 @@ namespace IsaacsHotell.Models
         [ForeignKey("FK_Rum")]
         public int RumId { get; set; }
         public Rum Rum { get; set; }
+        public bool ExtraSäng { get; set; }
 
         static int Kollarledigaplatser()//??kanske nått att ha 
         {

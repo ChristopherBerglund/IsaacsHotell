@@ -17,6 +17,8 @@ namespace IsaacsHotell.Controllers
         private readonly HotellDbContext _context;
         private readonly UserManager<Användare> _userManager;
         private readonly SignInManager<Användare> _signInManager;
+        static readonly TimeSpan start = new TimeSpan(18, 00, 00);
+        static readonly TimeSpan end = new TimeSpan(00, 00, 00);
 
         public OrdersController(HotellDbContext context, UserManager<Användare> userManager, SignInManager<Användare> signInManager)
         {
@@ -29,7 +31,7 @@ namespace IsaacsHotell.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             var hittauserid = _context.Gäster.Where(x => x.Förnamn == user.Namn).Select(x => x.Id).ToList();
-            if (DateTime.Now.Hour <= 18)
+            if (DateTime.Now.TimeOfDay >= end && DateTime.Now.TimeOfDay <= start ) //ÄNDRADE LITE I KODEN =)
             {
                 var Frukost = new Order { Pris = 50, Produkt = "Frukost", GästId = hittauserid[0] };
                 _context.Ordrar.Add(Frukost);

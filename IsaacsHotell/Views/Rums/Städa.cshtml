@@ -1,0 +1,50 @@
+﻿@model IEnumerable<IsaacsHotell.Models.Rum>
+
+@{
+    ViewData["Title"] = "Städ";
+}
+    <form asp-action="Städrapport">
+    <input type="submit" value="Uppdatera smutsiga rum" class="Boka" />
+    </form>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Namn)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Smutsigt)
+                </th>
+                <th>
+                    Klicka om du städat
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Namn)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Smutsigt)
+                    </td>
+                    <td>
+                        <form asp-action="Städaa">
+
+                            <input id="_ID" name="_ID" type="hidden" class="" value="@item.Id" />
+                            <input type="submit" value="Har städats" class="Boka" />
+                        </form>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+

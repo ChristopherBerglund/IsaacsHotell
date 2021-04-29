@@ -1,0 +1,52 @@
+﻿@model IEnumerable<IsaacsHotell.Models.Rum>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Namn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Antalsovplatser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Smutsigt)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Namn)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Antalsovplatser)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Smutsigt)
+                </td>
+
+                <td>
+                    <p>Extra säng:</p><input id="_IsCleaned" name="_IsCleaned" type="checkbox" class="" value="true" onclick="Städrapport()" />
+
+                    <p> - </p>
+                    <input type="submit" value="Uppdatera" class="Boka" />
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

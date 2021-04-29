@@ -1,4 +1,6 @@
-﻿using System;
+﻿using IsaacsHotell.Data;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -21,5 +23,18 @@ namespace IsaacsHotell.Models
         public List<Bokning> Bokningar { get; set; }
         [Required]
         public double PrisPerNatt { get; set; }
+
+        public static void Städa()
+        {
+            //smutsigt = true;
+            
+
+
+
+
+
+        }
     }
+
+ 
 }

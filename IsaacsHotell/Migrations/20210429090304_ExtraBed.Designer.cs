@@ -4,14 +4,16 @@ using IsaacsHotell.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IsaacsHotell.Migrations
 {
     [DbContext(typeof(HotellDbContext))]
-    partial class HotellDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210429090304_ExtraBed")]
+    partial class ExtraBed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,13 +42,13 @@ namespace IsaacsHotell.Migrations
                         new
                         {
                             Id = 1,
-                            Efternamn = "Wagner",
+                            Efternamn = "Anka",
                             Förnamn = "Anders"
                         },
                         new
                         {
                             Id = 2,
-                            Efternamn = "Wagner",
+                            Efternamn = "Bengtsson",
                             Förnamn = "Bertil"
                         },
                         new
@@ -191,11 +193,9 @@ namespace IsaacsHotell.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Efternamn")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Förnamn")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("OrderId")
@@ -214,8 +214,8 @@ namespace IsaacsHotell.Migrations
                         {
                             Id = 1,
                             BokningId = 1,
-                            Efternamn = "Wagner",
-                            Förnamn = "Karl",
+                            Efternamn = "Aronsson",
+                            Förnamn = "Alf",
                             OrderId = 1
                         });
                 });
@@ -234,7 +234,6 @@ namespace IsaacsHotell.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Produkt")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -265,7 +264,6 @@ namespace IsaacsHotell.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Namn")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("PrisPerNatt")
