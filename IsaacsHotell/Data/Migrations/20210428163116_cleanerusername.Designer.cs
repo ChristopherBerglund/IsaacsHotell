@@ -4,14 +4,16 @@ using IsaacsHotell.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IsaacsHotell.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210428163116_cleanerusername")]
+    partial class cleanerusername
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,134 +96,58 @@ namespace IsaacsHotell.Data.Migrations
                         {
                             Id = "02174cf0–9412–4cfe-afbf-59f706d72cf6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d9044c46-16c1-4c87-9e6e-a40f98927720",
-                            Efternamn = "Wagner",
-                            Email = "Mrwagner@hotellet.se",
+                            ConcurrencyStamp = "438d97dd-5248-48be-9ac1-a52ad8bb5d73",
+                            Efternamn = "Ofoedu",
+                            Email = "frankofoedu@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            Namn = "Karl",
-                            NormalizedEmail = "mrwagner@HOTELLET.SE",
-                            NormalizedUserName = "MRWAGNER@HOTELLET.SE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFgcvcX1IMIBLwYx0dtUycq5JVrgvRL62gvqAPpkUHq/6s+/3kudhl6YVHsmwmrAaA==",
-                            PhoneNumber = "0713371337",
+                            Namn = "Frank",
+                            NormalizedEmail = "FRANKOFOEDU@GMAIL.COM",
+                            NormalizedUserName = "FRANKOFOEDU@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJtDiy3JmqFlWQ0g63tFgKFKPneJGvjVFMtFKy9ytJ8sXddaQO8ZKPCvFQmBBTGu2w==",
+                            PhoneNumber = "0784545454",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "e6bd12f1-9e20-41bd-92b8-37601b51db96",
+                            SecurityStamp = "19872282-8cb9-43b8-8c60-b05f093286ea",
                             TwoFactorEnabled = false,
-                            UserName = "mrwagner@hotellet.se"
+                            UserName = "frankofoedu@gmail.com"
                         },
                         new
                         {
-                            Id = "02123cf0–9652–4cde-afaf-59f706c72cf6",
+                            Id = "451089f0-da4s–5d6s-pqwe-59kmoldp78df6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f2ed9692-f462-4b60-b35a-39568baa51f3",
-                            Efternamn = "Wagner",
-                            Email = "Mrswagner@hotellet.se",
+                            ConcurrencyStamp = "cfcdad1b-4a03-42b3-b79f-3c924f7a2939",
+                            Efternamn = "Vodka",
+                            Email = "Abosolut@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            Namn = "Amanda",
-                            NormalizedEmail = "mrswagner@HOTELLET.SE",
-                            NormalizedUserName = "MRSWAGNER@HOTELLET.SE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOHNIAUDyqTZ2gvMxUEolfNNN8Un1W5uNEJtf2SjkfiqMAawyivIp8uh2MyL+2LjJg==",
-                            PhoneNumber = "0713371338",
-                            PhoneNumberConfirmed = true,
-                            SecurityStamp = "c752f761-8e5b-446a-a336-d61a935d5c43",
-                            TwoFactorEnabled = false,
-                            UserName = "mrswagner@hotellet.se"
-                        },
-                        new
-                        {
-                            Id = "452349f0-da4s–5d6s-pqwe-59kmoldp78df6",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "72c4b304-c959-4ed3-890b-bb10b99f5ee7",
-                            Efternamn = "Algotsson",
-                            Email = "Algot@hotellet.se",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            Namn = "Algot",
-                            NormalizedEmail = "Algot@HOTELLET.SE",
-                            NormalizedUserName = "ALGOT@HOTELLET.SE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIKv9/Nz/YcxqtxqNM0A6zKY8jVO1oW3lj3VJfwizg3L1qkdNzF9t4Kkpfoa204zAQ==",
+                            Namn = "Absolut",
+                            NormalizedEmail = "ABOSOLUT@GMAIL.COM",
+                            NormalizedUserName = "ABSOLUT@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGH/Xj40fuIzrGRT0v6TwVwHffCus2C2TiVft5wdFjYaHIG3I/dsOdcaU68Z0ezuSQ==",
                             PhoneNumber = "0784545884",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "9426c766-3b9c-4c07-8910-424bc35b2bda",
+                            SecurityStamp = "0b161a29-2cbc-4e0a-b7b8-1adda4dd1b0e",
                             TwoFactorEnabled = false,
-                            UserName = "Algot@hotellet.se"
-                        },
-                        new
-                        {
-                            Id = "451029f0-da4s–5css-pawe-59kmolad21df6",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "86d884b9-c951-4c6e-a3ed-84cd5deee65b",
-                            Efternamn = "Beritsson",
-                            Email = "Berit@hotellet.se",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            Namn = "Berit",
-                            NormalizedEmail = "BERIT@HOTELLET.SE",
-                            NormalizedUserName = "BERIT@HOTELLET.SE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMwl3GLxnMO/F4gHJE5+JIRGWlYmI1quWizmboru17JhNGOlb6h6EgEP4+53xEMvNw==",
-                            PhoneNumber = "0784545884",
-                            PhoneNumberConfirmed = true,
-                            SecurityStamp = "1facfd36-1abf-49ab-90da-2609531829be",
-                            TwoFactorEnabled = false,
-                            UserName = "berit@hotellet.se"
-                        },
-                        new
-                        {
-                            Id = "446929f0-dv2s–5csr-aawe-59ktylad21df6",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "c509c928-d8ae-4dce-8755-4d78eb834c6c",
-                            Efternamn = "Stark",
-                            Email = "Ceasar@hotellet.se",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            Namn = "Ceasar",
-                            NormalizedEmail = "Ceasar@HOTELLET.SE",
-                            NormalizedUserName = "CEASAR@HOTELLET.SE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJRSW/ZK9uKkiwrnUTUamNO71WA5KKn2i200iBixtlmEEXq5S8L6R18ecRG6t4OdgQ==",
-                            PhoneNumber = "0784545884",
-                            PhoneNumberConfirmed = true,
-                            SecurityStamp = "c87cd9e8-e28f-4e28-a24e-cabcf7347502",
-                            TwoFactorEnabled = false,
-                            UserName = "Ceasar@hotellet.se"
+                            UserName = "Abosolut@gmail.com"
                         },
                         new
                         {
                             Id = "569842f0-78dw–65ws-qwbf-59dafgqw345f6",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a62b0b32-4571-4e1b-8289-cb7862ae8182",
-                            Efternamn = "Ruskie",
-                            Email = "Bernard@hotellet.se",
+                            ConcurrencyStamp = "088ff29f-f3e5-4a5c-9e9a-f0773b4175f9",
+                            Efternamn = "STÄD",
+                            Email = "clean@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            Namn = "Bernard",
-                            NormalizedEmail = "BERNARD@HOTELLET.SE",
-                            NormalizedUserName = "BERNARD@HOTELLET.SE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHLX5N/3dqWHPvjs9jK1ZqLTRqiiCU5gLzL5oKyTabv0XwaksUCpWjWauXlCZRwF8Q==",
+                            Namn = "STÄD",
+                            NormalizedEmail = "CLEAN@GMAIL.COM",
+                            NormalizedUserName = "CLEAN@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOLIfziUxlgQMFZW/IOHEiLzO/2I0IIZmdR+0T8RXabXb8cuhV0nLZKZbxLNC67zTg==",
                             PhoneNumber = "0748612345",
                             PhoneNumberConfirmed = true,
-                            SecurityStamp = "763f5548-8f69-458f-8687-40300c45d1be",
+                            SecurityStamp = "8ad8d3e6-f4f6-40f1-b7b4-664353153d26",
                             TwoFactorEnabled = false,
-                            UserName = "Bernard@hotellet.se"
-                        },
-                        new
-                        {
-                            Id = "569878f0-71bw–6hwq-qnmf-59dafgqg035f6",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "463d7644-1edf-4e22-8883-5fba1329ecbd",
-                            Efternamn = "Lotr",
-                            Email = "Alva@hotellet.se",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            Namn = "Alva",
-                            NormalizedEmail = "ALVA@HOTELLETS.SE",
-                            NormalizedUserName = "ALVA@HOTELLETS.SE",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJGC2igOfXjYUcIbiOg0gertvtDJ0muqifp0UVCCPJbKtVdTOjluJaec4eKmvMG0Lg==",
-                            PhoneNumber = "0748612345",
-                            PhoneNumberConfirmed = true,
-                            SecurityStamp = "91309744-1dc7-48d1-b60f-04165b43e4b3",
-                            TwoFactorEnabled = false,
-                            UserName = "Alva@hotellet.se"
+                            UserName = "clean@gmail.com"
                         });
                 });
 
@@ -367,33 +293,13 @@ namespace IsaacsHotell.Data.Migrations
                         },
                         new
                         {
-                            UserId = "569878f0-71bw–6hwq-qnmf-59dafgqg035f6",
-                            RoleId = "912345f0-hgd2–41ae-vnqf-59ghjknm72cf6"
+                            UserId = "451089f0-da4s–5d6s-pqwe-59kmoldp78df6",
+                            RoleId = "334567f0-whj2–47de-atyf-59qbvcse96cf6"
                         },
                         new
                         {
                             UserId = "569842f0-78dw–65ws-qwbf-59dafgqw345f6",
                             RoleId = "912345f0-hgd2–41ae-vnqf-59ghjknm72cf6"
-                        },
-                        new
-                        {
-                            UserId = "446929f0-dv2s–5csr-aawe-59ktylad21df6",
-                            RoleId = "334567f0-whj2–47de-atyf-59qbvcse96cf6"
-                        },
-                        new
-                        {
-                            UserId = "451029f0-da4s–5css-pawe-59kmolad21df6",
-                            RoleId = "334567f0-whj2–47de-atyf-59qbvcse96cf6"
-                        },
-                        new
-                        {
-                            UserId = "452349f0-da4s–5d6s-pqwe-59kmoldp78df6",
-                            RoleId = "334567f0-whj2–47de-atyf-59qbvcse96cf6"
-                        },
-                        new
-                        {
-                            UserId = "02123cf0–9652–4cde-afaf-59f706c72cf6",
-                            RoleId = "341743f0-asd2–42de-afbf-59kmkkmk72cf6"
                         });
                 });
 

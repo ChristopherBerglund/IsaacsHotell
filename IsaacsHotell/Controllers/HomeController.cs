@@ -40,6 +40,7 @@ namespace IsaacsHotell.Controllers
          
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
         //[Authorize(Policy= "Admin")]
         public IActionResult Administration()
         {

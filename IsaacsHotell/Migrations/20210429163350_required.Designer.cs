@@ -4,14 +4,16 @@ using IsaacsHotell.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IsaacsHotell.Migrations
 {
     [DbContext(typeof(HotellDbContext))]
-    partial class HotellDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210429163350_required")]
+    partial class required
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,9 +66,6 @@ namespace IsaacsHotell.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<bool>("ExtraSäng")
-                        .HasColumnType("bit");
-
                     b.Property<int>("GästId")
                         .HasColumnType("int");
 
@@ -91,7 +90,6 @@ namespace IsaacsHotell.Migrations
                         new
                         {
                             Id = 1,
-                            ExtraSäng = false,
                             GästId = 1,
                             Incheckning = new DateTime(2021, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RumId = 1,
@@ -100,7 +98,6 @@ namespace IsaacsHotell.Migrations
                         new
                         {
                             Id = 2,
-                            ExtraSäng = false,
                             GästId = 1,
                             Incheckning = new DateTime(2021, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RumId = 2,
@@ -109,7 +106,6 @@ namespace IsaacsHotell.Migrations
                         new
                         {
                             Id = 3,
-                            ExtraSäng = false,
                             GästId = 1,
                             Incheckning = new DateTime(2021, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RumId = 3,
@@ -118,7 +114,6 @@ namespace IsaacsHotell.Migrations
                         new
                         {
                             Id = 4,
-                            ExtraSäng = false,
                             GästId = 1,
                             Incheckning = new DateTime(2021, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RumId = 4,
@@ -127,7 +122,6 @@ namespace IsaacsHotell.Migrations
                         new
                         {
                             Id = 5,
-                            ExtraSäng = false,
                             GästId = 1,
                             Incheckning = new DateTime(2021, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RumId = 5,
@@ -136,7 +130,6 @@ namespace IsaacsHotell.Migrations
                         new
                         {
                             Id = 6,
-                            ExtraSäng = false,
                             GästId = 1,
                             Incheckning = new DateTime(2021, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RumId = 6,
@@ -145,7 +138,6 @@ namespace IsaacsHotell.Migrations
                         new
                         {
                             Id = 7,
-                            ExtraSäng = false,
                             GästId = 1,
                             Incheckning = new DateTime(2021, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RumId = 7,
@@ -154,7 +146,6 @@ namespace IsaacsHotell.Migrations
                         new
                         {
                             Id = 8,
-                            ExtraSäng = false,
                             GästId = 1,
                             Incheckning = new DateTime(2021, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RumId = 8,
@@ -163,7 +154,6 @@ namespace IsaacsHotell.Migrations
                         new
                         {
                             Id = 9,
-                            ExtraSäng = false,
                             GästId = 1,
                             Incheckning = new DateTime(2021, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RumId = 9,
@@ -172,7 +162,6 @@ namespace IsaacsHotell.Migrations
                         new
                         {
                             Id = 10,
-                            ExtraSäng = false,
                             GästId = 1,
                             Incheckning = new DateTime(2021, 4, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             RumId = 10,
