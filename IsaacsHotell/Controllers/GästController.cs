@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IsaacsHotell.Data;
 using IsaacsHotell.Models;
+using IsaacsHotell.Method;
 
 namespace IsaacsHotell.Controllers
 {
@@ -42,8 +43,11 @@ namespace IsaacsHotell.Controllers
                 return NotFound();
             }
 
+            var ordrar = _context.Ordrar.Where(x => x.GästId == gäst.Id).Select(x => x).ToList();
+            ViewBag.totalpris = TotalPris.Summera(ordrar);
             return View(gäst);
         }
+
 
         // GET: Gäst/Create
         public IActionResult Create()

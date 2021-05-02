@@ -10,30 +10,34 @@
     <h4>Gäst</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Förnamn)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Förnamn)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Efternamn)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Efternamn)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.BokningId)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.BokningId)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Order)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Order.Id)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Order)
         </dd>
+        <dt class="col-sm-2">
+            Totalpris för kundens ordrar: @ViewBag.totalpris kr
+        </dt>
+
     </dl>
 </div>
 <div>
