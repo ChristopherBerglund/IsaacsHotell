@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace IsaacsHotell.Controllers
 {
-    [Authorize("Admin, Reception")]
+    
     public class BokningsController : Controller
     {
         private readonly HotellDbContext _context;
@@ -176,7 +176,9 @@ namespace IsaacsHotell.Controllers
         //KONTROLLERAR OM DET FINNS LEDIGA RUM
         public async Task<IActionResult> LookForAvailableRooms(DateTime BookFrom, DateTime BookTo, int NoOfMembers, Rum Rum, string Extrabed)
         {
+     
 
+           
 
             //bool overlap = tStartA < tEndB && tStartB < tEndA;
             //bool overlap = a.start < b.end && b.start < a.end;
@@ -186,9 +188,9 @@ namespace IsaacsHotell.Controllers
             //var allarumid = _context.Rum.Select(x => x.Id).ToList();
 
             var allaupptagnarum = _context.Bokningar.Where(x => (x.Incheckning <= BookFrom && x.Utcheckning >= BookTo) 
-                                                    || (x.Incheckning < BookFrom && (x.Utcheckning > BookFrom && x.Utcheckning < BookTo)) 
-                                                    || ((x.Incheckning > BookFrom && x.Incheckning < BookTo) && x.Utcheckning > BookTo)
-                                                    || (x.Incheckning > BookFrom && x.Utcheckning < BookTo))
+                                                            || (x.Incheckning < BookFrom && (x.Utcheckning > BookFrom && x.Utcheckning < BookTo)) 
+                                                            || ((x.Incheckning > BookFrom && x.Incheckning < BookTo) && x.Utcheckning > BookTo)
+                                                            || (x.Incheckning > BookFrom && x.Utcheckning < BookTo))
                                             .Select(x => x.Rum).ToList();
             //var alluptagnaid = allaupptagnarum.Select(x => x.Id).ToList();
 
@@ -259,15 +261,20 @@ namespace IsaacsHotell.Controllers
                 ViewBag.Errormessage = "Det verkar som alla rummen är upptagna. Försök med ett annat datum!";
                 return View();
             }
+            //}
+            //else {
+            //    return Redirect("/Identity/Account/Register"); //dentity/Account/Register
+            //}
 
-            
-          
 
         }
         //SKAPAR BOKNINGEN
         public async Task<IActionResult> ConfirmTheBooking(DateTime _BookFrom, DateTime _BookTo, int _NoOfMembers, int _RoomId, int _nätter, double _kostnad, bool _ExtraBed)
         {
+            if (User.Identity.IsAuthenticated)
+            {
 
+           
             var usergäst = new Gäst();
             var user = await _userManager.GetUserAsync(User);
 
@@ -298,10 +305,15 @@ namespace IsaacsHotell.Controllers
             ViewBag.antGäster = _NoOfMembers;
             ViewBag.kostnad1 = _kostnad;
             ViewBag.ExtraBed = _ExtraBed;
-
+                 
 
             return View();
-
+            }
+            else
+            {
+          
+                return RedirectToAction("CheckFreeRooms", "Boknings");
+            }
         }
 
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace IsaacsHotell.Controllers
 {
-    [AllowAnonymous]
+    [Authorize(Policy = "Admin")]
     public class RoleController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -18,13 +18,13 @@ namespace IsaacsHotell.Controllers
         {
             this.roleManager = roleManager;
         }
-        [Authorize(Policy = "readpolicy")]
+        
         public IActionResult Index()
         {
             var roles = roleManager.Roles.ToList();
             return View(roles);
         }
-        [Authorize(Policy = "writepolicy")]
+        [Authorize(Policy = "Admin")]
         public IActionResult Create()
         {
             return View(new IdentityRole());

@@ -25,10 +25,6 @@ namespace IsaacsHotell
                 try
                 {
                     var hotellcontext = services.GetRequiredService<HotellDbContext>();
-                    //var context = services.GetRequiredService<ApplicationDbContext>();
-
-
-                    //DBinit.Initialiser(context);
 
                 }
                 catch (Exception ex)

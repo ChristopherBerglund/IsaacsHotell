@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using IsaacsHotell.Data;
 using IsaacsHotell.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IsaacsHotell.Controllers
 {
@@ -21,7 +22,7 @@ namespace IsaacsHotell.Controllers
         public IActionResult Städrapport()
         {
 
-            var listasmutsigarum = _context.Bokningar.Where(x => x.Incheckning.Day <= DateTime.Now.Day && x.Utcheckning.Day >= DateTime.Now.Day).Include(x => x.Rum).Select(x => x.Rum).ToList();
+            var listasmutsigarum = _context.Bokningar.Where(x => x.Incheckning <= DateTime.Now && x.Utcheckning >= DateTime.Now).Include(x => x.Rum).Select(x => x.Rum).ToList();
 
             foreach (var rum in listasmutsigarum)
             {
@@ -35,6 +36,7 @@ namespace IsaacsHotell.Controllers
 
         }
         // GET: Rums
+        [Authorize("Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Rum.ToListAsync());

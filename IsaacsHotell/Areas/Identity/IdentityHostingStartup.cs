@@ -22,7 +22,7 @@ namespace IsaacsHotell.Areas.Identity
                     options.AddPolicy("Cleaner",
                         builder => builder.RequireRole( "Admin", "Reception", "Cleaner"));
                     options.AddPolicy("Reception",
-                        builder => builder.RequireRole("Admin", "Cleaner"));
+                        builder => builder.RequireRole("Admin", "Reception"));
                     options.AddPolicy("Admin",
                         builder => builder.RequireRole("Admin"));
                 });

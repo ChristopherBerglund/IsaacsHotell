@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace IsaacsHotell.Controllers
 {
-    [Authorize("Admin, Reception")]
+    
     public class OrdersController : Controller
     {
         private readonly HotellDbContext _context;
@@ -47,6 +47,7 @@ namespace IsaacsHotell.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        [Authorize("Reception")]
         public async Task<IActionResult> UserOrder()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -60,12 +61,14 @@ namespace IsaacsHotell.Controllers
         }
 
         // GET: Orders
+        [Authorize("Reception")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Ordrar.ToListAsync());
         }
 
         // GET: Orders/Details/5
+        [Authorize("Reception")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -84,6 +87,7 @@ namespace IsaacsHotell.Controllers
         }
 
         // GET: Orders/Create
+        [Authorize("Reception")]
         public IActionResult Create()
         {
             return View();
@@ -94,6 +98,7 @@ namespace IsaacsHotell.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize("Reception")]
         public async Task<IActionResult> Create([Bind("Id,Pris,GästId")] Order order)
         {
             if (ModelState.IsValid)
@@ -106,6 +111,7 @@ namespace IsaacsHotell.Controllers
         }
 
         // GET: Orders/Edit/5
+        [Authorize("Reception")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -126,6 +132,7 @@ namespace IsaacsHotell.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize("Reception")]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Pris,GästId")] Order order)
         {
             if (id != order.Id)
@@ -157,6 +164,7 @@ namespace IsaacsHotell.Controllers
         }
 
         // GET: Orders/Delete/5
+        [Authorize("Reception")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -177,6 +185,7 @@ namespace IsaacsHotell.Controllers
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize("Reception")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var order = await _context.Ordrar.FindAsync(id);

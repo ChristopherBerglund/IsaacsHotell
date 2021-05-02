@@ -24,17 +24,5 @@ namespace IsaacsHotell.Models
         [Required]
         public double PrisPerNatt { get; set; }
 
-        public static void Städa()
-        {
-            //smutsigt = true;
-            
-
-
-
-
-
-        }
     }
-
- 
 }
